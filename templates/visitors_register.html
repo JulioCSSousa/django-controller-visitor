@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+  <div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">{{ nome_pagina }}</h1>
+    </div>
+
+    <div class="card shadow mb-4" style="height: 100%;">
+      <div class="card-body">
+        <h4 class="mb-3 text-primary">New Visitor Register</h4>
+
+        <form method="post">
+          <div class="form">
+            {% csrf_token %}
+
+            {% for field in form %}
+              <label>{{ field.label }} {% if field.field.required %} * {% endif %}</label>
+              <div class="form-group col md-12">
+                {% render_field field placeholder=field.label class='form-control' %}
+              </div>
+            {% endfor %}
+          </div>
+          <div class="text-right">
+            <button class="btn btn-primary" type="submit">
+              <span class="text">Register </span>
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
